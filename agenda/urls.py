@@ -22,5 +22,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('agenda/', views.lista_eventos),
     # path('', views.index) # dessa maneira passa por função na views.
-    path('', RedirectView.as_view(url='/agenda/')) # dessa forma não precisa criar uma função em views
+    path('', RedirectView.as_view(url='/agenda/')),  # dessa forma não precisa criar uma função em views
+    path('login/', views.login_user),
+    path('login/submit', views.submit_login),
+    path('logout/', views.logout_user)
 ]
