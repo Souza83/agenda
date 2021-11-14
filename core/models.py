@@ -20,3 +20,6 @@ class Evento(models.Model):
 
     def get_data_evento(self):
         return self.data_evento.strftime('%d/%m/%Y %H:%M Hrs')
+
+    def __str__(self):
+        return self.local
