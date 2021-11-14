@@ -13,9 +13,11 @@ from django.contrib import messages
 def login_user(request):
     return render(request, 'login.html')
 
+
 def logout_user(request):
     logout(request)
     return redirect('/')
+
 
 def submit_login(request):
     if request.POST:
@@ -38,3 +40,22 @@ def lista_eventos(request):
     # evento = Evento.objects.all()  # CUIDADO com o tamanho do banco de dados ao ser utilizado "ALL"
     dados = {'eventos': evento}  # cria um dicionário
     return render(request, 'agenda.html', dados)
+
+
+@login_required(login_url='/login/')
+def evento(request):
+    return render(request, 'evento.html')
+
+
+@login_required(login_url='/login/')
+def submit_evento(request):
+    if request.POST:
+        titulo = request.POST.get('titulo')
+        data_evento = request.POST.get('data_evento')
+        derscricao = request.POST.get('derscricao')
+        usuario = request.user
+        Evento.objects.create(titulo=titulo,
+                              data_evento=data_evento,
+                              derscricao=derscricao,
+                              usuario=usuario)
+    return redirect('/')
